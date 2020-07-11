@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<title>Itália e Grécia</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+	
+	<style type="text/css">
+	  body {
+		margin:0; padding:0;
+		font:.75em/1.5 sans-serif;
+	  }
+
+	  h4  {
+		font-size: 1em;
+	  }
+
+	  .column-in {
+		margin:0px; padding:0px;
+	  }
+	  
+	  .column-button {
+		float: right;
+		vertical-align: top;
+	  }
+
+
+	  /* THE DIV TO TABLE TECHNIQUE */
+	  #container {		
+		width: 90%;
+		margin-left: 10px;
+		display: table;
+		border: 1px solid black;
+	  }
+
+	  #row  {
+		display: table-row;
+	  }
+
+	  #left {
+		padding:0;
+		display: table-cell;
+	  }
+
+	  #right {
+		display: table-cell;
+	  }
+	</style>
+
+</head>
+<body>
+	<div id="mapid" style="width: 100%; height: 550px;"></div>
+	
+	<div id="container">
+		<div id="row">
+			<div id="left">
+				<div class="column-in">					
+					<figure style="width:550px">
+					  <img src="https://drive.expresso.pe.gov.br/s/b4N0DgG2tUGnfb8/download">
+					</figure>						
+				</div>
+			</div>
+			
+			<div id="right">
+				<div class="column-button">					
+					<div>
+						<div class="buttons">
+						  <button class="button is-info" onclick="moveMapa('Roma')">Roma</button>
+						  <button class="button is-success" onclick="moveMapa('Florença')">Florença</button>
+						  <button class="button is-warning" onclick="moveMapa('Veneza')">Veneza</button>
+						  <button class="button is-danger" onclick="moveMapa('Atenas')">Atenas</button>
+						</div>
+					</div>						
+				</div>
+			</div>
+		</div>
+	</div>	
+	
+	<script>
+		var mymap = L.map('mapid').setView([41.9007, 12.4833], 14);		
+
+		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+				'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			id: 'mapbox/streets-v11',
+			tileSize: 512,
+			zoomOffset: -1
+		}).addTo(mymap);
+
+		//Lugares importantes em Roma
+		var roma_places = [		  
+		  {
+			name: "Panteão",
+			lat_coordinate: "12.4768",
+			long_coordinate: "41.8986",
+			color: "green"
+		  },
+		  {
+			name: "Piazza Navona",
+			lat_coordinate: "12.4730",
+			long_coordinate: "41.8991",
+			color: "orange"
+		  },
+		  {
+			name: "Praça de Pedra (Piazza di Pietra)",
+			lat_coordinate: "12.4797",
+			long_coordinate: "41.9001",
+			color: "orange"
+		  },
+		  {
+			name: "Antico Caffè Greco",
+			lat_coordinate: "12.4815",
+			long_coordinate: "41.9056",
+			color: "red"
+		  },
+		  {
+			name: "Praça Espanha (Piazza di Spagna)",
+			lat_coordinate: "12.4822",
+			long_coordinate: "41.9057",
+			color: "orange"
+		  },
+		  {
+			name: "Monte Pinciano",
+			lat_coordinate: "12.4796",
+			long_coordinate: "41.9113",
+			color: "green"
+		  },
+		  {
+			name: "Praça das Pessoas (Piazza del Popolo)",
+			lat_coordinate: "12.4763",
+			long_coordinate: "41.9106",	 
+			color: "orange"
+		  },
+		  {
+			name: "Palatino",
+			lat_coordinate: "12.4873",
+			long_coordinate: "41.8893",
+			color: "green"
+		  },
+		  {
+			name: "Coliseu (Colosseo)",
+			lat_coordinate: "12.4923",
+			long_coordinate: "41.8901",
+			color: "green"
+		  },
+		  {
+			name: "Fórum Romano",
+			lat_coordinate: "12.4853",
+			long_coordinate: "41.8924",
+			color: "green"
+		  },
+		  {
+			name: "Fórum di Trajano",
+			lat_coordinate: "12.4853",
+			long_coordinate: "41.8951",
+			color: "green"
+		  },
+		  {
+			name: "Mercado de Trajano",
+			lat_coordinate: "12.4862",
+			long_coordinate: "41.8956",
+			color: "green"
+		  },
+		  {
+			name: "Cidade do Vaticano",
+			lat_coordinate: "12.4531",
+			long_coordinate: "41.9028",
+			color: "green"
+		  },
+		  {
+			name: "Basílica de São Pedro",
+			lat_coordinate: "12.4539",
+			long_coordinate: "41.9021",
+			color: "green"
+		  },
+		  {
+			name: "Capela Cistina",
+			lat_coordinate: "12.4545",
+			long_coordinate: "41.9029",
+			color: "green"
+		  },
+		  {
+			name: "Piazza Venezia",
+			lat_coordinate: "12.4825",
+			long_coordinate: "41.8957",
+			color: "orange"
+		  },
+		  {
+			name: "Via del Corso (Conectas as praças Del Popolo e Venezzia)",
+			lat_coordinate: "12.4789",
+			long_coordinate: "41.9046",
+			color: "green"
+		  },
+		  {
+			name: "Fontana de Trevi",
+			lat_coordinate: "12.4833",
+			long_coordinate: "41.9009",
+			color: "green"
+		  },
+		  {
+			name: "San Carlo alle Quattro Fontane",
+			lat_coordinate: "12.4905",
+			long_coordinate: "41.9017",
+			color: "green"
+		  },
+		  {
+			name: "Basílica de Santa Maria Maggiore",
+			lat_coordinate: "12.4984",
+			long_coordinate: "41.8976",
+			color: "green"
+		  },
+		  
+		  //--------------- FORENÇA -----------------
+		  {
+			name: "Basílica de Santa Cruz",
+			lat_coordinate: "11.2622",
+			long_coordinate: "43.7685",
+			color: "green"
+		  },{
+			name: "Santa Maria del Fiore",
+			lat_coordinate: "11.2557",
+			long_coordinate: "43.7731",
+			color: "green"
+		  },{
+			name: "Batistério de São João",
+			lat_coordinate: "11.2549",
+			long_coordinate: "43.7732",
+			color: "green"
+		  },{
+			name: "Cupola di Brunelleschi",
+			lat_coordinate: "11.2569",
+			long_coordinate: "43.7731",
+			color: "green"
+		  },{
+			name: "Campanário de Giotto",
+			lat_coordinate: "11.2557",
+			long_coordinate: "43.7727",
+			color: "green"
+		  },{
+			name: "Piazza della Repubblica",
+			lat_coordinate: "11.2539",
+			long_coordinate: "43.7714",
+			color: "orange"
+		  },{
+			name: "Palazzo Vecchio",
+			lat_coordinate: "11.2561",
+			long_coordinate: "43.7693",
+			color: "green"
+		  },{
+			name: "Galleria degli Uffizi",
+			lat_coordinate: "11.2553",
+			long_coordinate: "43.7677",
+			color: "green"
+		  },{
+			name: "Museo Galileo",
+			lat_coordinate: "11.2559",
+			long_coordinate: "43.7677",
+			color: "green"
+		  },{
+			name: "Ponte Vecchio",
+			lat_coordinate: "11.2531",
+			long_coordinate: "43.7680",
+			color: "green"
+		  },{
+			name: "Palácio Pitti",
+			lat_coordinate: "11.2500",
+			long_coordinate: "43.7651",
+			color: "green"
+		  },{
+			name: "Basilica di Santa Maria Novella",
+			lat_coordinate: "11.2493",
+			long_coordinate: "43.7746",
+			color: "green"
+		  },{
+			name: "Mercato di San Lorenzo",
+			lat_coordinate: "11.2531",
+			long_coordinate: "43.7767",
+			color: "red"
+		  },{
+			name: "Piazzale Michelangelo - Pôr do Sol TOP",
+			lat_coordinate: "11.2650",
+			long_coordinate: "43.7629",
+			color: "orange"
+		  },{
+			name: "Basílica de S. Lourenço",
+			lat_coordinate: "11.2538",
+			long_coordinate: "43.7749",
+			color: "green"
+		  },{
+			name: "Galeria da Academia de Artes de Florença",
+			lat_coordinate: "11.2587",
+			long_coordinate: "43.7768",
+			color: "green"
+		  },{
+			name: "PIAZZA SAN GIOVANNI",
+			lat_coordinate: "11.2549",
+			long_coordinate: "43.7728",
+			color: "orange"
+		  },{
+			name: "Piazza della Signoria",
+			lat_coordinate: "11.2556",
+			long_coordinate: "43.7696",
+			color: "orange"
+		  },{
+			name: "Piazza di Santa Maria Novella",
+			lat_coordinate: "11.2496",
+			long_coordinate: "43.7731",
+			color: "orange"
+		  },{
+			name: "Piazza di Santa Croce",
+			lat_coordinate: "11.2613",
+			long_coordinate: "43.7689",
+			color: "orange"
+		  }		  		
+		];
+		/*
+		,{
+			name: "",
+			lat_coordinate: "",
+			long_coordinate: "",
+			color: ""
+		  }
+		*/
+
+		//Icons	= Markers: https://github.com/pointhi/leaflet-color-markers
+		//Gera um ícone na cor desejada
+		function generateIconColor(color) {
+			let iconUrlStr = "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-" + color + ".png";
+			
+			var newIconColor = new L.Icon({
+				iconUrl: iconUrlStr,
+				shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+				iconSize: [25, 41],
+				iconAnchor: [12, 41],
+				popupAnchor: [1, -34],
+				shadowSize: [41, 41]
+			});
+
+			return newIconColor;
+		}
+		
+		//Markers Array
+		function listPlacesByCity(places) {
+		  for (let i=0; i<places.length; i+=1) {		   
+		   let long_float = parseFloat(places[i].long_coordinate);
+		   let lat_float = parseFloat(places[i].lat_coordinate);
+		   let iconColor = generateIconColor(places[i].color);		   		  
+			
+		   //Marcador
+		   L.marker([long_float, lat_float], {icon: iconColor}).addTo(mymap)
+			.bindPopup("<b>" + places[i].name +"</b>").openPopup();			
+		  }		  
+		}
+		
+		function moveMapa(cidade) {
+			let latitude = 12.4833;
+			let longitude = 41.9007;
+			let zoom = 14;
+			
+			switch(cidade) {
+			  case 'Roma':
+				latitude = 12.4833;
+				longitude = 41.9007;				
+				break;
+			  case 'Florença':
+				latitude = 11.2521;
+				longitude = 43.7727;
+				break;
+			  case 'Veneza':
+				latitude = 12.3275;
+				longitude = 45.4375;
+				zoom = 13;
+				break;
+			  case 'Atenas':
+				latitude = 23.7292;
+				longitude = 37.9702;
+				break;
+			  default:
+				latitude = 12.4833;
+				longitude = 41.9007;
+				break;
+			}
+			
+			mymap.setView(new L.LatLng(longitude, latitude), zoom);			
+		}
+		
+		//Listando os lugares em Roma
+		listPlacesByCity(roma_places);
+		
+		//Centraliza o Mapa
+		mymap.setView(new L.LatLng(41.9007, 12.4833), 14);
+	</script>
+</body>
+</html>
+
+<!--
+/*
+2.3. Antico Caffè Greco, Via Condotti, Roma, Itália (Mais de 250 anos, creme de café delicioso)
+
+OBS:
+- 16 diárias, no máximo
+*/
+-->
