@@ -95,7 +95,8 @@
 		}).addTo(mymap);
 
 		//Lugares importantes em Roma
-		var roma_places = [		  
+		var places = [		
+		  //--------------- ROMA -----------------
 		  {
 			name: "Panteão",
 			lat_coordinate: "12.4768",
@@ -318,16 +319,138 @@
 			lat_coordinate: "11.2613",
 			long_coordinate: "43.7689",
 			color: "orange"
-		  },{
+		  }
+		  //--------------- VENEZA -----------------
+		  ,{
 			name: "Ponte da Academia",
 			lat_coordinate: "12.3288",
 			long_coordinate: "45.4316",
 			color: "green"
+		  },{
+			name: "Punta della dogana",
+			lat_coordinate: "12.3362",
+			long_coordinate: "45.4308",
+			color: "green"
+		  },{
+			name: "Campo San Rocco",
+			lat_coordinate: "12.3255",
+			long_coordinate: "45.4366",
+			color: "orange"
+		  },{
+			name: "Piazza San Marco",
+			lat_coordinate: "12.338368",
+			long_coordinate: "45.4341",
+			color: "orange"
+		  },{
+			name: "Ponte di Rialto",
+			lat_coordinate: "12.3359",
+			long_coordinate: "45.4380",
+			color: "green"
+		  },{
+			name: "Mercato de Rialto",
+			lat_coordinate: "12.3351",
+			long_coordinate: "45.4386",
+			color: "green"
+		  },{
+			name: "Palácio Ducal",
+			lat_coordinate: "12.3403",
+			long_coordinate: "45.4336",
+			color: "green"
+		  },{
+			name: "Ponte Dos Suspiros",
+			lat_coordinate: "12.3408",
+			long_coordinate: "45.4340",
+			color: "green"
+		  },{
+			name: "Riva degli Schiavoni",
+			lat_coordinate: "12.3426",
+			long_coordinate: "45.4338",
+			color: "green"
+		  },{
+			name: "Teatro la Fenice",
+			lat_coordinate: "12.3337",
+			long_coordinate: "45.4336",
+			color: "green"
 		  }
+		  //--------------- ATENAS -----------------
+		  ,{
+			name: "Acrópole de Atenas",
+			lat_coordinate: "23.7257",
+			long_coordinate: "37.9715",
+			color: "green"
+		  },{
+			name: "Museu da Acrópole",
+			lat_coordinate: "23.7285",
+			long_coordinate: "37.9684",
+			color: "green"
+		  },{
+			name: "Partenon",
+			lat_coordinate: "23.7267",
+			long_coordinate: "37.9715",
+			color: "green"
+		  },{
+			name: "Praça Syntagma (Plateia Syntagmatos)",
+			lat_coordinate: "23.7347",
+			long_coordinate: "37.9755",
+			color: "orange"
+		  },{
+			name: "Museu Arqueológico de Atenas",
+			lat_coordinate: "23.7327",
+			long_coordinate: "37.9890",
+			color: "green"
+		  },{
+			name: "Templo de Zeus Olímpico e o Arco de Adriano",
+			lat_coordinate: "23.7327",
+			long_coordinate: "37.9694",
+			color: "orange"
+		  },{
+			name: "Ágora de Atenas",
+			lat_coordinate: "23.7219",
+			long_coordinate: "37.9746",
+			color: "green"
+		  },{
+			name: "Ágora Romana",
+			lat_coordinate: "23.7255",
+			long_coordinate: "37.9743",
+			color: "green"
+		  },{
+			name: "Templo da Atena Niké",
+			lat_coordinate: "23.7248",
+			long_coordinate: "37.9715",
+			color: "green"
+		  },{
+			name: "Estádio Panatenáico",
+			lat_coordinate: "23.7365",
+			long_coordinate: "37.9712",
+			color: "orange"
+		  },{
+			name: "Templo de Hefesto",
+			lat_coordinate: "23.7214",
+			long_coordinate: "37.9755",
+			color: "green"
+		  },{
+			name: "Erecteion - Antigo Templo de Atenas",
+			lat_coordinate: "23.7264",
+			long_coordinate: "37.9720",
+			color: "green"
+		  },{
+			name: "Odeão de Herodes Ático",
+			lat_coordinate: "23.7245",
+			long_coordinate: "37.9708",
+			color: "green"
+		  }
+		  
 		];
+		
 		/*
 		
-		
+		,{
+			name: "Templo de Hefesto",
+			lat_coordinate: "23.7214",
+			long_coordinate: "37.9755",
+			color: "green"
+		  }
+		  
 		,{
 			name: "",
 			lat_coordinate: "",
@@ -383,7 +506,7 @@
 			  case 'Veneza':
 				latitude = 12.3275;
 				longitude = 45.4375;
-				zoom = 13;
+				zoom = 14;
 				break;
 			  case 'Atenas':
 				latitude = 23.7292;
@@ -399,7 +522,7 @@
 		}
 		
 		//Listando os lugares em Roma
-		listPlacesByCity(roma_places);
+		listPlacesByCity(places);
 		
 		//Centraliza o Mapa
 		mymap.setView(new L.LatLng(41.9007, 12.4833), 14);
